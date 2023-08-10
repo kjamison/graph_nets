@@ -274,7 +274,12 @@ def data_dict_to_networkx(data_dict):
     ValueError: If the `NODES` field of `data_dict` contains `None`, and
       `data_dict` does not have a `N_NODE` field.
   """
-  graph_nx = nx.OrderedMultiDiGraph()
+  
+  #graph_nx = nx.OrderedMultiDiGraph()
+  graph_nx = nx.MultiDiGraph() 
+  #KJ 2023: OrderedMultiDiGraph deprecate in nx2.6, and Graph always ordered in Python >= 3.7
+  #see https://networkx.org/documentation/networkx-2.8/reference/classes/ordered.html
+  
   data_dict = _populate_number_fields(data_dict)
   graph_nx.graph[GRAPH_NX_FEATURES_KEY] = data_dict[GLOBALS]
 
